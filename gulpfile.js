@@ -1,34 +1,22 @@
-﻿var gulp = require("gulp");
-var rename = require("gulp-rename");
-var sass = require('gulp-sass');
-var bourbon = require('bourbon').includePaths;
-var neat = require('bourbon-neat').includePaths;
+var gulp = require('gulp');
+var log = require('fancy-log');
+var del = require('del');
 
+var options = {
 
-gulp.task('buildcssfromsass', function () {
-    gulp.src('./node_modules/usajobs-design-system/_scss/all-usajobs.scss')
-        .pipe(sass({
-            includePaths: [
-                bourbon,
-                neat,
-                './node_modules/uswds/src/stylesheets/',
-                './node_modules/uswds/src/stylesheets/lib/',
-                './node_modules/usajobs-design-system/_scss/'
-            ]
-        }).on('error', sass.logError))
-        .pipe(rename('usajobs-design-system-base.css'))
-        .pipe(gulp.dest('./Content/usaj-design-system/css'));
+}
 
-    gulp.src('./node_modules/usajobs-design-system/_scss/components.scss')
-        .pipe(sass({
-            includePaths: [
-                bourbon,
-                neat,
-                './node_modules/uswds/src/stylesheets/',
-                './node_modules/uswds/src/stylesheets/lib/',
-                './node_modules/usajobs-design-system/_scss/'
-            ]
-        }).on('error', sass.logError))
-        .pipe(rename('usajobs-design-system-components.css'))
-        .pipe(gulp.dest('./Content/usaj-design-system/css'));
+gulp.task('clean-css', function(){
+  return del(['css']);
 });
+
+gulp.task('clean-js', function(){
+  return del(['js']);
+});
+
+gulp.task('clean', ['clean-js', 'clean-css']);
+
+gulp.task('css', ['clean-css'], function(){
+
+});
+
