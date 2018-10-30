@@ -7,6 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var options = {
   sassInputLocationGlob: '_scss/**/*.scss',
   cssOutputLocation: './_site/css',
+  jsOutputLocation: './_site/js',
   sassSourcemapsOutputLocation: 'TODO',
   nodeSassOptions: {
     // Per the gulp readme at https://github.com/dlmanning/gulp-sass#readme,
@@ -20,17 +21,17 @@ var options = {
 }
 
 gulp.task('clean-css', function(){
-  return del(['css']);
+  return del([options.cssOutputLocation]);
 });
 
 gulp.task('clean-js', function(){
-  return del(['js']);
+  return del([options.jsOutputLocation]);
 });
 
 gulp.task('clean', ['clean-js', 'clean-css']);
 
 gulp.task('css', ['sass', 'autoprefixer', 'css-min'], function(){
-  return log('running css');
+  return log('TODO: running css');
 });
 
 gulp.task('sass', ['clean-css'], function(){
@@ -43,11 +44,11 @@ gulp.task('sass', ['clean-css'], function(){
 
 gulp.task('autoprefixer', ['sass'], function()
 {
-  return log('running autoprefixer');
+  return log('TODO: running autoprefixer');
 });
 
 gulp.task('css-min', ['autoprefixer'], function(){
-  return log('running css-min');
+  return log('TODO: running css-min');
 });
 
 gulp.task('watch:sass', function(){
