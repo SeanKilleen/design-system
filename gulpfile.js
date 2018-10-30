@@ -8,7 +8,7 @@ var options = {
   sassInputLocationGlob: '_scss/**/*.scss',
   cssOutputLocation: './_site/css',
   jsOutputLocation: './_site/js',
-  sassSourcemapsOutputLocation: 'sourcemaps',
+  sassSourcemapsOutputLocation: 'sourcemaps', // TODO: I made this up. You may have to find where it's searching for the maps and output them there
   nodeSassOptions: {
     // Per the gulp readme at https://github.com/dlmanning/gulp-sass#readme,
     // These will be passed along directly. Options reference at https://github.com/sass/node-sass#options 
