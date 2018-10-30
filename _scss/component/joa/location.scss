@@ -3,9 +3,6 @@
 @import '../../base-shared';
 
 .usajobs-joa-locations {
-  $icon-width: rem(9.72px);
-  $icon-padding: $size-base;
-  $body-padding: $size-S;
 
   &__sub-title {
     margin-top: $size-base;
@@ -97,6 +94,10 @@
   }
 
   &__body {
+    $icon-width: rem(9.72px);
+    $icon-padding: $size-base;
+    $body-padding: $size-S;
+  
     @include calc(width, "100% - " ($icon-width + $icon-padding + $body-padding));
 
     .lt-ie9 & {
