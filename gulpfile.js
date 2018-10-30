@@ -3,6 +3,9 @@ var log = require('fancy-log');
 var del = require('del');
 var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
+var autoprefixer = require('gulp-autoprefixer');
+var concat = require('gulp-concat');
+var cssnano = require('gulp-cssnano');
 
 var options = {
   sassInputLocationGlob: '_scss/**/*.scss',
@@ -30,25 +33,34 @@ gulp.task('clean-js', function(){
 
 gulp.task('clean', ['clean-js', 'clean-css']);
 
-gulp.task('css', ['sass', 'autoprefixer', 'css-min'], function(){
-  return log('TODO: running css');
-});
+gulp.task('css', ['sass', 'autoprefixer', 'css-min']);
 
 gulp.task('sass', ['clean-css'], function(){
   return gulp.src(options.sassInputLocationGlob)
     .pipe(sourcemaps.init())
     .pipe(sass(options.nodeSassOptions).on('error', sass.logError))
+    .pipe(concat('all.css'))
     .pipe(sourcemaps.write(options.sassSourcemapsOutputLocation))
     .pipe(gulp.dest(options.cssOutputLocation))
 });
 
 gulp.task('autoprefixer', ['sass'], function()
 {
-  return log('TODO: running autoprefixer');
+  return gulp.src(options.cssOutputLocation + '/all.css')
+    .pipe(sourcemaps.init())
+    .pipe(autoprefixer({
+      browers: ['last 3 versions', '> 2% in US']
+    }))
+    .pipe(sourcemaps.write(options.sassSourcemapsOutputLocation))
+    .pipe(gulp.dest(options.cssOutputLocation))
 });
 
 gulp.task('css-min', ['autoprefixer'], function(){
-  return log('TODO: running css-min');
+  return gulp.src(options.cssOutputLocation + '/all.css')
+    .pipe(sourcemaps.init())
+    .pipe(cssnano())
+    .pipe(sourcemaps.write(options.sassSourcemapsOutputLocation))
+    .pipe(gulp.dest(options.cssOutputLocation))
 });
 
 gulp.task('watch:sass', function(){
