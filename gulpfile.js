@@ -39,14 +39,13 @@ gulp.task('sass', ['clean-css'], function(){
   return gulp.src(options.sassInputLocationGlob)
     .pipe(sourcemaps.init())
     .pipe(sass(options.nodeSassOptions).on('error', sass.logError))
-    .pipe(concat('all.css'))
     .pipe(sourcemaps.write(options.sassSourcemapsOutputLocation))
     .pipe(gulp.dest(options.cssOutputLocation))
 });
 
 gulp.task('autoprefixer', ['sass'], function()
 {
-  return gulp.src(options.cssOutputLocation + '/all.css')
+  return gulp.src(options.cssOutputLocation + '**/*.css')
     .pipe(sourcemaps.init())
     .pipe(autoprefixer({
       browers: ['last 3 versions', '> 2% in US']
@@ -56,7 +55,7 @@ gulp.task('autoprefixer', ['sass'], function()
 });
 
 gulp.task('css-min', ['autoprefixer'], function(){
-  return gulp.src(options.cssOutputLocation + '/all.css')
+  return gulp.src(options.cssOutputLocation + '**/*.css')
     .pipe(sourcemaps.init())
     .pipe(cssnano())
     .pipe(sourcemaps.write(options.sassSourcemapsOutputLocation))
